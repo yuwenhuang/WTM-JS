@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 This is all foods
+    if foods.length
+        table
+            thead
+                td Name
+                td Country
+                td Type
+            each food in foods
+                tr
+                    td #{food.name}
+                    td #{food.country}
+                    td #{food.type}
+
+        pre= JSON.stringify(foods, null, 2)
+    else
+        p There is no food yet.
+    script.
+        console.log(!{JSON.stringify(foods)})           
