@@ -1,11 +1,16 @@
-module.exports = class User{
-    constructor(id, name, email){
-        this.id = id || 0
-        this.name = name
-        this.email = email
-    }
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
-    static create(user){
-        return new User(user.id, user.name, user.email)
+const UserSchema = mongoose.Schema({
+    name:{
+        type: String,
+        required: true
+    },
+    email:{
+        type: String
     }
-}
+})
+
+UserSchema.plugin(AutoIncrement, {id:'user_seq', inc_field: 'id'})
+
+module.exports = mongoose.model('User', UserSchema)

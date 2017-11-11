@@ -1,14 +1,18 @@
-module.exports = class Food{
-    constructor(id, name, country, type) {
-        this.id = id || 0
-        this.name = name
-        this.country = country
-        this.type = type
+const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
+
+const FoodSchema = mongoose.Schema({
+    name:{
+        type: String,
+        required: true 
+    },
+    country:{
+        type: String
+    },
+    type:{
+        type: String
     }
+})
 
-    static create(food){
-        return new Food(food.id, food.name, food.country, food.type);
-    }
-
-
-}
+FoodSchema.plugin(AutoIncrement, {id: 'food_seq', inc_field: 'id'})
+module.exports = mongoose.model('Food', FoodSchema)

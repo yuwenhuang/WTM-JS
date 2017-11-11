@@ -5,11 +5,13 @@ block content
     if foods.length
         table
             thead
+                td id
                 td Name
                 td Country
                 td Type
             each food in foods
                 tr
+                    td #{food.id}
                     td #{food.name}
                     td #{food.country}
                     td #{food.type}
